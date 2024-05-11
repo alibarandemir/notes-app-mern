@@ -1,0 +1,9 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@layer components{
+    .input-style{
+        @apply rounded-md w-full text-black border-yellow-300 border-2
+    }
+}
