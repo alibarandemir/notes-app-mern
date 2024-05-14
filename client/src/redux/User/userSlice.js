@@ -28,7 +28,6 @@ const userSlice= createSlice({
             state.userName= action.payload.userName;
             state.email= action.payload.email;
             state.avatar= action.payload.avatar;
-            state.message=action.payload.message;
         })
         builder.addCase(getProfile.rejected,(state,action)=>{
             state.loading=false;

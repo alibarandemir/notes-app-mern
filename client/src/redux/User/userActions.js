@@ -1,17 +1,19 @@
-const { createAsyncThunk } = require("@reduxjs/toolkit")
+import { createAsyncThunk } from "@reduxjs/toolkit"
 
 const backendUrl = 'http://localhost:5000';
 
-const getProfile=createAsyncThunk('getProfile',async(userId,token)=>{
+export const getProfile=createAsyncThunk('getProfile',async(userData)=>{
     try{
-        const res=  await fetch(`${backendUrl}/${userId}`, {
+        console.log(userData)
+        
+        const res=  await fetch(`${backendUrl}/profile/${userData.userId}`, {
             method: "GET", // *GET, POST, PUT, DELETE, etc.
             mode: "cors", // no-cors, *cors, same-origin
             cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
             credentials: "same-origin", // include, *same-origin, omit
             headers: {
               "Content-Type": "application/json",
-              "Auth": `${token}`,
+              "Auth": `${userData.token}`,
               
             },
             redirect: "follow", // manual, *follow, error
@@ -30,10 +32,9 @@ const getProfile=createAsyncThunk('getProfile',async(userId,token)=>{
 
 
 
-const editProfile=createAsyncThunk('editProfile', async()=>{
+export const editProfile=createAsyncThunk('editProfile', async()=>{
 
 })
 
 
 
-module.exports={getProfile,editProfile}

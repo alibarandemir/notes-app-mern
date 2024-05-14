@@ -6,7 +6,11 @@ const bodyParser = require('body-parser');
 const cors= require('cors')
 const dotenv = require('dotenv');
 const authRoute= require('./routes/auth.js');
-const noteRoute= require('./routes/note.js')
+const noteRoute= require('./routes/note.js');
+const userRoute= require('./routes/user.js');
+const upload = require('./middleware/uploadMiddleWare.js');
+const { uploadToCloudinary } = require('./config/cloudinary.js');
+
 dotenv.config()
 
 
@@ -18,6 +22,8 @@ database();
 
 app.use('/',authRoute)
 app.use('/',noteRoute)
+app.use('/',userRoute)
+
 
 const PORT= process.env.PORT || 5000
 app.listen(PORT,()=>{

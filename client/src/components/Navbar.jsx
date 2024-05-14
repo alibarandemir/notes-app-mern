@@ -16,7 +16,8 @@ export default function Navbar() {
    console.log(userId)
     useEffect(()=>{
       
-      
+      console.log(ref.current)
+      ref.current.classList.add('bg-purple-950')
       if(token==null){
         navigate('/login');
       }
@@ -28,14 +29,14 @@ export default function Navbar() {
   return (
     <div className='leftnavbar bg-yellow-300 fixed left-0 h-2/3 w-14 flex items-center justify-center mt-32 '>
             <div className='flex flex-col gap-y-9'>
-                <div>
-                <Link ref={ref}>
-                    <FaHome  className='text-4xl cursor-pointer text-white bg-purple-950'/>
+                <div ref={ref}>
+                <Link to={'/'} >
+                    <FaHome  className='text-4xl cursor-pointer text-white '/>
                   </Link>
                 </div>
                 
-                <div>
-                <Link to={`/profile/${userId}`} ref={ref}>
+                <div ref={ref}>
+                <Link to={`/profile/${userId}`} >
                   <FaUser className='text-white cursor-pointer text-4xl'/>
                 </Link>
                 </div>

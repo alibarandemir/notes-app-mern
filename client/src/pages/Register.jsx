@@ -8,9 +8,11 @@ import Loading from '../components/Loading';
 import '../input.css'
 
 
+
 export default function Register() {
     const dispatch = useDispatch();
     const navigate=useNavigate();
+    const [avatarPreview, setAvatarPreview] = useState(null);
 
     const [formData,setFormData] = useState({
       avatar:"",
@@ -20,15 +22,6 @@ export default function Register() {
     });
     
     const { userInfo,loading,error,token } = useSelector((state) => state.auth);
-    useEffect(()=>{
-      if(userInfo.success){
-        navigate('/');
-        
-      }
-     
-    },[])
-   
-    
     useEffect(() => {
       if(userInfo.message){
         toast(userInfo.message)
@@ -39,14 +32,24 @@ export default function Register() {
       }
       }
     , [userInfo]);
-    
+    const showAndUploadİmg=(file)=>{
+        const reader = new FileReader();
+        reader.onload = () => {
+          setAvatarPreview(reader.result);
+        };
+        reader.readAsDataURL(file);
+        console.log(avatarPreview)
+    }
     const {userName,email,password}=formData
     const handleOnChange=(e)=>{
         if(e.target.name=='avatar'){
+          const file=e.target.files[0];
           setFormData({
             ...formData,
-            avatar:e.target.files[0]
+            avatar:file
           })
+          showAndUploadİmg(file);
+          
         }
         else{
         const {name,value}= e.target;
@@ -90,7 +93,14 @@ export default function Register() {
         <form enctype="multipart/form-data" className='w-2/3' onSubmit={handleSubmit}>
           <div className='text-left mt-5'>
             <label className='block'>Avatar:</label>
-            <input multiple={false} type='file' name='avatar' onChange={handleOnChange} className='input-style' placeholder='john123' required/>
+            <div className='flex flex-col border-2 border-yellow-300'><input multiple={false} type='file' name='avatar' onChange={handleOnChange} className='input-style' placeholder='john123' required/>
+              <div>
+                
+                <img src={avatarPreview}/>
+              </div>
+            
+            </div>
+            
           </div>
           <div className='text-left mt-5'>
             <label className='block'>User Name:</label>
