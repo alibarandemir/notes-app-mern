@@ -32,8 +32,28 @@ export const getProfile=createAsyncThunk('getProfile',async(userData)=>{
 
 
 
-export const editProfile=createAsyncThunk('editProfile', async()=>{
+export const editProfile=createAsyncThunk('editProfile', async(userData)=>{
+    try{
+      const res=  await fetch(`${backendUrl}/profile/${userData.userId}`, {
+        method: "PUT", // *GET, POST, PUT, DELETE, etc.
+        mode: "cors", // no-cors, *cors, same-origin
+        cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+        credentials: "same-origin", // include, *same-origin, omit
+        headers: {
+          "Content-Type": "application/json",
+          "Auth": `${userData.token}`,
+          
+        },
+        redirect: "follow", 
+        referrerPolicy: "no-referrer",
+      });
+    const data = await res.json();
+    console.log(data);
+    return data;
+    }
+    catch(e){
 
+    }
 })
 
 

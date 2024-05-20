@@ -15,7 +15,16 @@ const getProfile=async (req,res)=>{
 
 }
 
-const editProfile=(req,res)=>{
+const editProfile= async(req,res)=>{
+    try{
+    const user= req.user
+    const selectedUser= await User.findByIdAndUpdate();
+
+    }
+    catch(e){
+
+    }
+
 
 }
 
