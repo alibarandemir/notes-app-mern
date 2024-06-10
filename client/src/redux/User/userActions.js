@@ -7,10 +7,10 @@ export const getProfile=createAsyncThunk('getProfile',async(userData)=>{
         console.log(userData)
         
         const res=  await fetch(`${backendUrl}/profile/${userData.userId}`, {
-            method: "GET", // *GET, POST, PUT, DELETE, etc.
+            method: "GET", 
             mode: "cors", // no-cors, *cors, same-origin
             cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-            credentials: "same-origin", // include, *same-origin, omit
+            credentials: "same-origin", 
             headers: {
               "Content-Type": "application/json",
               "Auth": `${userData.token}`,
@@ -20,7 +20,7 @@ export const getProfile=createAsyncThunk('getProfile',async(userData)=>{
             referrerPolicy: "no-referrer",
           });
         const data = await res.json();
-        console.log(data);
+        
         return data;
     }
     catch(error){
@@ -34,6 +34,8 @@ export const getProfile=createAsyncThunk('getProfile',async(userData)=>{
 
 export const editProfile=createAsyncThunk('editProfile', async(userData)=>{
     try{
+      console.log(userData)
+      
       const res=  await fetch(`${backendUrl}/profile/${userData.userId}`, {
         method: "PUT", // *GET, POST, PUT, DELETE, etc.
         mode: "cors", // no-cors, *cors, same-origin
@@ -44,15 +46,18 @@ export const editProfile=createAsyncThunk('editProfile', async(userData)=>{
           "Auth": `${userData.token}`,
           
         },
+        body: JSON.stringify(userData),
         redirect: "follow", 
         referrerPolicy: "no-referrer",
       });
     const data = await res.json();
+    
     console.log(data);
+    console.log("editdeyiz")
     return data;
     }
     catch(e){
-
+      console.error(e.message)
     }
 })
 

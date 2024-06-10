@@ -64,7 +64,7 @@ export default function NoteList() {
     }
   }
   const {notes}= useSelector((state)=>state.note)
-  console.log(notes)
+  
   return (
     <div className=' w-full border-4 border-gray-700 h-full flex flex-wrap justify-around relative '>
       {notes.map((note,index)=>{
