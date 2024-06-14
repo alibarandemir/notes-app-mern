@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react'
 import useClickOut from '../hooks/useClickOut'
 import { useDispatch, useSelector } from 'react-redux'
 import Loading from './Loading'
-import { createNote } from '../redux/Note/noteActions'
+import { createNote, getNotes } from '../redux/Note/noteActions'
 import toast from 'react-hot-toast';
 
 export default function CreateNote({isOpen, setIsOpen}) {
@@ -39,6 +39,7 @@ export default function CreateNote({isOpen, setIsOpen}) {
     try{
       e.preventDefault();
        await dispatch(createNote(note))
+       dispatch(getNotes(note.token))
 
       //setIsOpen(false);
     } 

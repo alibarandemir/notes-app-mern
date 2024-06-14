@@ -6,8 +6,7 @@ import CreateNote from './CreateNote';
 export default function CreateNoteButton() {
 
     const [isOpen,setIsOpen]= useState(false);
-    console.log(isOpen)
-    console.log('a')
+   
     
   return (
     <div>

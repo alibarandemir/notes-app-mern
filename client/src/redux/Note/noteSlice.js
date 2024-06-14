@@ -5,6 +5,8 @@ const initialState= {
     loading:false,
     userId:null,
     notes:[],
+    initialNotes:[],
+    searchTerm:'',
     error:null,
     success:null,
     message:null,
@@ -14,6 +16,23 @@ const noteSlice= createSlice({
     name:'note',
     initialState,
     reducers:{
+        noteSearch:(state,action)=>{
+            const searchTerm= action.payload;
+            state.searchTerm= action.payload;
+            const lowerCaseSearchTerm = searchTerm.toLowerCase();
+            console.log(searchTerm);
+            if(searchTerm==''){
+                state.notes=state.initialNotes;
+            }
+            else{
+                const results = state.notes.filter(note => 
+                    note.title.toLowerCase().includes(lowerCaseSearchTerm) || 
+                    note.content.toLowerCase().includes(lowerCaseSearchTerm)
+                  );
+                console.log(results)
+                state.notes= results;
+            }
+        },
         
     },
     extraReducers:(builder)=>{
@@ -23,6 +42,7 @@ const noteSlice= createSlice({
         builder.addCase(getNotes.fulfilled,(state,action)=>{
             console.log(action.payload);
             state.notes= action.payload.notes;
+            state.initialNotes= action.payload.notes;
             state.userId= action.payload.userId
             state.loading=false;
         })
@@ -68,5 +88,5 @@ const noteSlice= createSlice({
         })
     }
 })
-
+export const {noteSearch}= noteSlice.actions; 
 export default noteSlice.reducer;

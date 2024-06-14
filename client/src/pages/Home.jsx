@@ -13,7 +13,6 @@ function Home() {
 
   },[dispatch])
   const {userInfo} = useSelector((state)=>state.auth)
-  console.log(userInfo)
   return (
     <div className='absolute w-full h-full'>
         <Navbar/>
